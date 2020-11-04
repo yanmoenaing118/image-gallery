@@ -58,7 +58,7 @@ body {
 .section-main .main-right {
   padding: 1rem;
   height: calc(100vh - 65px);
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   border: 2px solid silver;
 }
 
