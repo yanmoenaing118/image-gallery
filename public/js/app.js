@@ -1,6 +1,5 @@
 const form = document.querySelector(".form");
 const button = document.querySelector(".submit");
-const profile = document.querySelector("#profile");
 
 if (form) {
   document.addEventListener("submit", handleSubmit);
@@ -12,6 +11,7 @@ if (button) {
 
 async function handleSubmit(e) {
   e.preventDefault();
+  setTextContext("submit", "uploading...");
   const formData = new FormData(form);
 
   fetch("http://localhost:3000/api/v1/uploads/images", {
@@ -35,4 +35,13 @@ function createImage(url, title) {
   img.src = `uploads/${url}`;
   galleryImg.appendChild(img);
   gallery.appendChild(galleryImg);
+
+  img.addEventListener("load", () => {
+    setTextContext("submit", "Save");
+  });
+}
+
+function setTextContext(className, text) {
+  const el = document.querySelector(`.${className}`);
+  el.textContent = text;
 }
