@@ -1,12 +1,18 @@
 const form = document.querySelector(".form");
 const button = document.querySelector(".submit");
 
+const fileInputElem = document.getElementById("chooseFile");
+
 if (form) {
-  document.addEventListener("submit", handleSubmit);
+  form.addEventListener("submit", handleSubmit);
 }
 
 if (button) {
-  document.addEventListener("submit", handleSubmit);
+  form.addEventListener("submit", handleSubmit);
+}
+
+if (fileInputElem) {
+  fileInputElem.addEventListener("change", handleFileSelected);
 }
 
 async function handleSubmit(e) {
@@ -14,7 +20,7 @@ async function handleSubmit(e) {
   setTextContext("submit", "uploading...");
   const formData = new FormData(form);
 
-  fetch("http://localhost:3000/api/v1/uploads/images", {
+  fetch("http://localhost:3001/api/v1/uploads/images", {
     method: "POST",
     body: formData,
   })
@@ -37,11 +43,53 @@ function createImage(url, title) {
   gallery.appendChild(galleryImg);
 
   img.addEventListener("load", () => {
-    setTextContext("submit", "Save");
+    setTextContext("submit", "upload");
   });
 }
 
 function setTextContext(className, text) {
   const el = document.querySelector(`.${className}`);
   el.textContent = text;
+}
+
+function handleFileSelected(e) {
+  let file = this.files[0];
+  let freader = new FileReader();
+  freader.readAsDataURL(file);
+
+  let img = document.createElement("img");
+  img.file = file;
+
+  freader.onload = (function (aImg) {
+    return function (event) {
+      aImg.src = event.target.result;
+      showSelectedFile(aImg);
+    };
+  })(img);
+}
+
+function showSelectedFile(img) {
+  let modal = document.querySelector(".modal");
+
+  modal.style.display = "flex";
+
+  document.querySelector(".modal-body").appendChild(img);
+
+  document.querySelector(".main-left").appendChild(modal);
+
+  confirmFile();
+}
+
+function confirmFile() {
+  document.querySelector(".ok-btn").addEventListener("click", function () {
+    document.querySelector(".modal").style.display = "none";
+    removeOldImage();
+  });
+}
+
+function removeOldImage() {
+  let childImg = document.querySelector(".modal-body img");
+  if (childImg) {
+    document.querySelector(".modal-body").removeChild(childImg);
+  }
 }

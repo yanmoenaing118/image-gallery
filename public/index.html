@@ -14,7 +14,21 @@
         <h1 class="logo">ImageGallery</h1>
     </header>
     <section class="section-main">
-        <div class="main-left">
+        <div class="main-left ">
+            <div class="modal">
+                <div class="modal-header">
+                    <h1>File Selected</h1>
+
+                </div>
+                <div class="modal-body">
+
+                </div>
+
+                <div class="modal-act">
+                    <button class="ok-btn">OK</button>
+                </div>
+
+            </div>
             <div class="upload">
                 <form action="/" method="POST" enctype="multipart/form-data" class="form">
                     <h1>Upload an image</h1>
@@ -25,15 +39,18 @@
                     <div class="form-group select">
                         <label for="chooseFile" class="choose">
                             <div class="upload-icon">
-                                <img src="images/upload.svg" />
+                                <img src="images/folder-open.svg" />
                             </div>
                             <span>choose file</span>
                         </label>
                         <input type="file" name="picture" id="chooseFile" class="hide" />
                     </div>
 
-                    <button class="submit">
-                        save
+                    <button class="upload-btn">
+                        <div class="upload-icon">
+                            <img src="images/upload.svg" />
+                        </div>
+                        <span class="submit">UPLOAD</span>
                     </button>
 
                 </form>
