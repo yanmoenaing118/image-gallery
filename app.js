@@ -20,7 +20,11 @@ const upload = multer({ storage: storage });
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(cors());
+app.use(
+  cors({
+    "Access-Control-Allow-Origin": "*",
+  })
+);
 
 app.post(
   "/api/v1/uploads/images",
