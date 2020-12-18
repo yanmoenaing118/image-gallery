@@ -18,25 +18,27 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
 
-app.post("/api/v1/uploads/images", upload.single("picture"), function (
-  req,
-  res
-) {
-  console.log(req.body);
-  console.log(req.file);
-  res.status(201).json({
-    status: "success",
-    data: {
-      url: `${req.file.filename}`,
-      title: req.body.filetitle,
-    },
-  });
-});
+app.post(
+  "/api/v1/uploads/images",
+  upload.single("picture"),
+  function (req, res) {
+    console.log(req.body);
+    console.log(req.file);
+    res.status(201).json({
+      status: "success",
+      data: {
+        url: `${req.file.filename}`,
+        title: req.body.filetitle,
+      },
+    });
+  }
+);
 
-app.listen(3000, () => {
-  console.log("3000");
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`${port}`);
 });
