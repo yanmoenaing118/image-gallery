@@ -20,7 +20,7 @@ async function handleSubmit(e) {
   setTextContext("submit", "uploading...");
   const formData = new FormData(form);
 
-  fetch("http://localhost:3000/api/v1/uploads/images", {
+  fetch("https://gallery.herokuapp.com/api/v1/uploads/images", {
     method: "POST",
     body: formData,
   })
