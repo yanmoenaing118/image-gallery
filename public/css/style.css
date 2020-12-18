@@ -147,6 +147,11 @@ button {
 .form input[type="text"] {
   outline: none;
   border: none;
+  width: 100%;
+}
+
+.form input[type="text"]:focus {
+  background-color: #fff;
 }
 
 .upload-btn {
@@ -182,8 +187,6 @@ button {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(auto, 1fr);
   grid-gap: 16px;
-  height: 100%;
-  overflow: scroll;
 }
 
 .gallery-img img {
@@ -256,5 +259,10 @@ button {
 @media (max-width: 480px) {
   .section-main {
     flex-direction: column;
+  }
+
+  .upload {
+    width: 100%;
+    margin: 1rem;
   }
 }

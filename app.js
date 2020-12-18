@@ -37,6 +37,6 @@ app.post("/api/v1/uploads/images", upload.single("picture"), function (
   });
 });
 
-app.listen(3001, () => {
+app.listen(3000, () => {
   console.log("3000");
 });
